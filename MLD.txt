@@ -1,0 +1,118 @@
+<MCD>
+    <entités>
+	• Members
+		- id (AI)
+		- username (varchar)
+		- password(varchar)
+		- photo (varchar)
+		- reegisterationDate (time)
+		- description
+		- status
+	• Lists
+		- id AI)
+		- name
+		- description
+		- visibility
+		- subject_number
+	• Tasks
+		- Id (AI)
+		- name
+		- description
+		- importance
+		- duedate
+		- remindDuedate
+		- status
+	• Forums
+		- ID (AI)
+		- Name
+		- Description
+		- Date
+		- Status
+	• Subjects
+		- id (AI)
+		- name 
+		- pinned
+		- status
+		- date
+		- task
+		- forum (FK)
+	• Messages
+		- Id (AI)
+		- id_sender
+		- Date
+		- Content
+		- status
+		- ip
+		- subjects
+	• privateMessage
+		- id
+		- date
+		- content
+		- ip
+	* Recipients
+		- id
+		- id_recipient
+		- id_sender
+		- 
+	</entités>
+	<associations>
+	Send (recipient, id_sender)
+	- Member 1,n
+	- <MCD>
+    <entités>
+	• Members
+		- id (AI)
+		- username (varchar)
+		- password(varchar)
+		- photo (varchar)
+		- reegisterationDate (time)
+		- description
+		- status
+	• Lists
+		- id AI)
+		- name
+		- description
+		- visibility
+		- status
+	• Tasks
+		- Id (AI)
+		- id_list
+		- name
+		- description
+		- importance
+		- duedate
+		- remindDuedate
+		- status
+	• Forums
+		- ID (AI)
+		- Name
+		- Description
+		- Date
+		- Status
+	• Subjects
+		- id (AI)
+		- id_forum
+		- name 
+		- pinned
+		- status
+		- date
+	• Messages
+		- Id (AI)
+		- id_subject
+		- Date
+		- Content
+		- status
+		- ip
+	• privateMessage
+		- id
+		- sender
+		- date
+		- title
+		- content
+		- ip
+	* sendPM
+		- id
+		- id_message
+		- id_recipient
+	</entités>
+</MCD>
