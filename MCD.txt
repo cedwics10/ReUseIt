@@ -6,8 +6,8 @@
 		- password(varchar)
 		- photo (varchar)
 		- reegisterationDate (time)
-		- Description
-		- Status
+		- description
+		- status
 	• Lists
 		- id AI)
 		- name
@@ -37,33 +37,33 @@
 		- Id (AI)
 		- Date
 		- Content
-		- Status
-		- IP
+		- status
+		- ip
 	• Private Message
-		- Id
-		- Date
-		- Content
-		- IP
+		- id
+		- date
+		- content
+		- ip
 	</entités>
 	<associations>
-	describe :
+	references :
 	- tasks 1,1
 	- lists 0,n
 
-	Treat : 
+	treat : 
 	- tasks 0,1
 	- subjects 0,1
 
-	List : 
+	List :
 	- forum 1,n
 	- subjects 1,1
 
-	References : 
+	list : 
 	- message 1,1
 	- subjects 1,n
 
-	Send :
+	Send (recipient)
 	- Member 1,n
-	- Private_messgage 1,n
+	- Private messgage 1,n
 	</associations>
 </MCD> 
