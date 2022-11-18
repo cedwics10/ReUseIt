@@ -1,49 +1,51 @@
 <MCD>
     <entités>
-	• Members
+	• members
 		- id (AI)
 		- username (varchar)
 		- password(varchar)
 		- photo (varchar)
-		- reegisterationDate (time)
-		- description
-		- status
-	• Lists
+		- arrival_date (date)
+		- description (text)
+		- status (int)
+	• lists
 		- id AI)
-		- name
-		- description
-		- visibility
-	• Tasks
-		- Id (AI)
-		- name
-		- description
-		- importance
-		- duedate
-		- remindDuedate
-		- status
-	• Forums
-		- ID (AI)
-		- Name
-		- Description
-		- Date
-		- Status
-	• Subjects
+		- name (varchar)
+ 		- description (text)
+		- visibility (int)
+		- subjectNumber (FK)
+	• tasks
 		- id (AI)
-		- name 
-		- pinned
-		- status
-		- date
-	• Messages
+		- id_list (FK)
+		- name (varchar)
+		- description (text)
+		- importance (int)
+		- due_date (date)
+		- remind_date (date)
+		- status (int)
+	• forums
+		- id (AI)
+		- Name (varchar)
+		- description (text)
+		- date (date)
+		- status (int)
+	• subjects
+		- id (AI)
+		- id_forum (FK)
+		- name (varchar) 
+		- pinned (int)
+		- status (int)
+		- date (date)
+		- task (FK or NULL)
+		- forum (FK)
+	• messages
 		- Id (AI)
-		- Date
-		- Content
-		- status
-		- ip
-	• Private Message
-		- id
-		- date
-		- content
-		- ip
+		- id_sender (FK)
+		- id_reciever (FK)
+		- date (date)
+		- content (text)
+		- status (int)
+		- ip (varchar)
 	</entités>
 	<associations>
 	references :
@@ -58,11 +60,15 @@
 	- forum 1,n
 	- subjects 1,1
 
-	list : 
+	references : 
 	- message 1,1
 	- subjects 1,n
+	
+	Send
+	- Member 1,n
+	- PrivateMessage 1,n
 
-	Send (recipient)
+	Recieve (ip_reciever, date)
 	- Member 1,n
 	- Private messgage 1,n
 	</associations>

@@ -1,118 +1,63 @@
-<MCD>
+<MLD>
     <entités>
-	• Members
+	• members
 		- id (AI)
 		- username (varchar)
 		- password(varchar)
 		- photo (varchar)
-		- reegisterationDate (time)
-		- description
-		- status
-	• Lists
+		- arrival_date (date)
+		- description (text)
+		- status (int)
+	• lists
 		- id AI)
-		- name
-		- description
-		- visibility
-		- subject_number
-	• Tasks
-		- Id (AI)
-		- name
-		- description
-		- importance
-		- duedate
-		- remindDuedate
-		- status
-	• Forums
-		- ID (AI)
-		- Name
-		- Description
-		- Date
-		- Status
-	• Subjects
+		- name (varchar)
+ 		- description (text)
+		- visibility (int)
+	• tasks
 		- id (AI)
-		- name 
-		- pinned
-		- status
-		- date
-		- task
+		- id_list (FK)
+		- name (varchar)
+		- description (text)
+		- importance (int)
+		- due_date (date)
+		- remind_date (date)
+		- status (int)
+	• forums
+		- id (AI)
+		- Name (varchar)
+		- description (text)
+		- date (date)
+		- status (int)
+	• subjects
+		- id (AI)
+		- id_forum (FK)
+		- name (varchar) 
+		- pinned (int)
+		- status (int)
+		- date (date)
+		- task (FK or NULL)
 		- forum (FK)
-	• Messages
+	• messages
 		- Id (AI)
-		- id_sender
-		- Date
-		- Content
-		- status
-		- ip
-		- subjects
-	• privateMessage
-		- id
-		- date
-		- content
-		- ip
-	* Recipients
-		- id
-		- id_recipient
-		- id_sender
-		- 
-	</entités>
-	<associations>
-	Send (recipient, id_sender)
-	- Member 1,n
-	- <MCD>
-    <entités>
-	• Members
+		- id_member (FK)
+		- date (date)
+		- content (text)
+		- status (int)
+		- ip (varchar)
+	• pmsubjects
 		- id (AI)
-		- username (varchar)
-		- password(varchar)
-		- photo (varchar)
-		- reegisterationDate (time)
-		- description
-		- status
-	• Lists
-		- id AI)
-		- name
-		- description
-		- visibility
-		- status
-	• Tasks
-		- Id (AI)
-		- id_list
-		- name
-		- description
-		- importance
-		- duedate
-		- remindDuedate
-		- status
-	• Forums
-		- ID (AI)
-		- Name
-		- Description
-		- Date
-		- Status
-	• Subjects
+		- name (varchar)
+		- task (INT NULL)
+		- id_author (int)
+	• pmanswers
 		- id (AI)
-		- id_forum
-		- name 
-		- pinned
-		- status
-		- date
-	• Messages
-		- Id (AI)
-		- id_subject
-		- Date
-		- Content
-		- status
-		- ip
-	• privateMessage
-		- id
-		- sender
-		- date
-		- title
-		- content
-		- ip
-	* sendPM
-		- id
-		- id_message
-		- id_recipient
-	</entités>
-</MCD>
+		- id_sender (int)
+		- id_pmsubject (int)
+		- message (varchar)
+	• pmrecievers
+		- id (AI)
+		- id_pmsubject (FK)
+		- id_answers (FK)
+		- id_reciever (FK)
+	</entites>
+</MLD>
