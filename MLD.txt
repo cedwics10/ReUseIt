@@ -53,9 +53,10 @@
 		- ip (varchar)
 	• pmanswers
 		- id (AI)
-		- id_sender (FK)
 		- id_pmsubject (FK)
+		- id_sender (FK)
 		- message (varchar)
+		- date (dateitme)
 	• pmrecievers
 		- id (AI)
 		- id_pmsubject (FK)

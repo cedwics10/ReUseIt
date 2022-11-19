@@ -1,6 +1,7 @@
 --
 -- base de données: 'reuseit'
 --
+drop database if exists reuseit;
 create database if not exists reuseit default character set utf8 collate utf8_general_ci;
 use reuseit;
 -- --------------------------------------------------------
@@ -9,8 +10,8 @@ use reuseit;
 set foreign_key_checks = 0;
 
 -- members table
-drop table if exists membres;
-create table membres (
+drop table if exists members;
+create table members (
 	mem_id int not null auto_increment primary key,
 	mem_username varchar(100) not null,
 	mem_password varchar(100) not null,
@@ -23,12 +24,13 @@ create table membres (
 -- lists table
 drop table if exists lists;
 create table lists (
-	lis_id_member int not null auto_increment primary key,
+	lis_id int not null auto_increment primary key,
+	lis_id_member int not null,
 	lis_member int not null,
 	lis_name varchar(100) not null,
 	lis_description text not null,
 	lis_visbility varchar(100) not null
-)engine=innodb
+)engine=innodb;
 
 -- tasks table
 drop table if exists tasks;
@@ -49,17 +51,17 @@ create table forums (
 	for_name varchar(500) not null,
 	for_description text not null,
 	for_date datetime not null,
-    for_status int not null,
+    for_status int not null
 )engine=innodb;
 
 -- subjects table
 drop table if exists subjects;
 create table subjects (
-	sub_id int not null auto_increment primary,
+	sub_id int not null auto_increment primary key,
 	sub_id_forum int not null,
 	sub_id_member int not null,
 	sub_id_task int,
-	sub_name varchar nto null,
+	sub_name varchar(500) not null,
 	sub_pinned int not null,
 	sub_status int not null,
 	sub_date datetime not null
@@ -93,9 +95,10 @@ create table pmsubjects (
 drop table if exists pmanswers;
 create table pmanswers (
 	pma_id int not null auto_increment primary key,
-	pma_id_sender int,
 	pma_id_subject int,
-	pma_message text not null
+	pma_id_sender int,
+	pma_message text not null,
+	pma_time datetime not null
 )engine=innodb;
 
 -- private messages recievers table
@@ -103,8 +106,10 @@ drop table if exists pmrecievers;
 create table pmrecievers (
 	pmr_id int not null auto_increment primary key,
 	pmr_id_pmsubject int not null,
-	pmr_id_answers int not null,
-	pmr_id_reciever int not null
+	pmr_id_answer int not null,
+	pmr_id_reciever int not null,
+	pmr_date_recieved datetime,
+	pmr_date_read datetime
 )engine=innodb;
 
 -- private messages not recieve table
@@ -118,24 +123,24 @@ create table pmnotrecieve (
 
 set foreign_key_checks =1;
 
--- contraintes
-
+-- constraints
 alter table lists add constraint author_lists foreign key (lis_id_member) references members(mem_id);
 alter table tasks add constraint list_of_task foreign key (tas_id_list) references lists(lis_id);
 
-alter table subjects add constraint subjects_forum foreign key (sub_id_forum) references forum(for_id);
+alter table subjects add constraint subjects_forum foreign key (sub_id_forum) references forums(for_id);
 alter table subjects add constraint author_subject foreign key (sub_id_member) references members(mem_id);
 
-alter table messages add constraint mess_subject foreign key (mes_id_subject) references subject(sub_id);
+alter table messages add constraint mess_subject foreign key (mes_id_subject) references subjects(sub_id);
 alter table messages add constraint mess_member foreign key (mes_id_member) references members(mem_id);
 
 alter table pmsubjects add constraint author_pm foreign key (pms_id_author) references members(mem_id);
 
-alter table pmanswers add constraint author_pm foreign key (pms_id_member) references members(mem_id);
+alter table pmanswers add constraint pma_subject foreign key (pma_id_subject) references pmsubjects(pms_id);
+alter table pmanswers add constraint pma_sender foreign key (pma_id_sender) references members(mem_id);
 
+alter table pmrecievers add constraint pmr_subject foreign key (pmr_id_pmsubject) references pmsubjects(pms_id);
+alter table pmrecievers add constraint pmr_reciever foreign key (pmr_id_reciever) references members(mem_id);
+alter table pmrecievers add constraint pmr_answer foreign key (pmr_id_answer) references pmanswers(pma_id);
 
-alter table produire add constraint cs1 foreign key (pro_auteur) references auteur(aut_id);
-alter table produire add constraint cs1 foreign key (pro_auteur) references auteur(aut_id);
-alter table produire add constraint cs1 foreign key (pro_auteur) references auteur(aut_id);
-alter table produire add constraint cs1 foreign key (pro_auteur) references auteur(aut_id);
-alter table produire add constraint cs1 foreign key (pro_auteur) references auteur(aut_id);
+alter table pmnotrecieve add constraint sub_stop_pmr foreign key (pmn_id_pmsubject) references pmsubjects(pms_id);
+alter table pmnotrecieve add constraint stop_pmr foreign key (pmn_id_member) references members(mem_id);
