@@ -1,5 +1,5 @@
 <MLD>
-    <entités>
+    <tables>
 	• members
 		- id (AI)
 		- username (varchar)
@@ -24,40 +24,47 @@
 		- status (int)
 	• forums
 		- id (AI)
-		- Name (varchar)
+		- name (varchar)
 		- description (text)
 		- date (date)
 		- status (int)
 	• subjects
 		- id (AI)
 		- id_forum (FK)
+		- task (FK or NULL)
 		- name (varchar) 
 		- pinned (int)
 		- status (int)
-		- date (date)
-		- task (FK or NULL)
-		- forum (FK)
+		- date (datetime)
 	• messages
 		- Id (AI)
 		- id_member (FK)
-		- date (date)
+		- id_subject (FK)
 		- content (text)
 		- status (int)
+		- date (datetime)
 		- ip (varchar)
 	• pmsubjects
 		- id (AI)
+		- id_author (FK)
+		- id_task (FK NULL)
+		- status (int)
 		- name (varchar)
-		- task (INT NULL)
-		- id_author (int)
+		- ip (varchar)
 	• pmanswers
 		- id (AI)
-		- id_sender (int)
-		- id_pmsubject (int)
+		- id_sender (FK)
+		- id_pmsubject (FK)
 		- message (varchar)
 	• pmrecievers
 		- id (AI)
 		- id_pmsubject (FK)
 		- id_answers (FK)
 		- id_reciever (FK)
-	</entites>
+	• pmnotrecieve
+		- id (AI)
+		- id_pmsubject (FK)
+		- id_member (FK)
+		- date_stop (datetime)
+	</tables>
 </MLD>

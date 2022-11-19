@@ -67,17 +67,61 @@ drop table if exists messages;
 create table messages (
 	mes_id int not null auto_increment primary key,
 	mes_member int not null,
+	mes_subject int not null,
 	mes_date datetime not null,
 	mes_content text not null,
     mes_status int not null,
 	mes_ip varchar(500) not null
 )engine=innodb;
 
+-- private messages subject table
+drop table if exists pmsubjects;
+create table pmsubjects (
+	pms_id int not null auto_increment primary key,
+	pms_name varchar(500) not null,
+	pms_task int,
+	pms_id_author int not null,
+    mes_status int not null,
+	pms_ip varchar(500) not null
+)engine=innodb;
 
+-- private messages answers table
+drop table if exists pmanswers;
+create table pmanswers (
+	pma_id int not null auto_increment primary key,
+	pma_id_sender int,
+	pma_id_subject int,
+	pma_message text not null
+)engine=innodb;
+
+-- private messages recievers table
+drop table if exists pmrecievers;
+create table pmrecievers (
+	pmr_id int not null auto_increment primary key,
+	pmr_id_pmsubject int not null,
+	pmr_id_answers int not null,
+	pmr_id_reciever int not null
+)engine=innodb;
+
+-- private messages not recieve table
+drop table if exists pmnotrecieve;
+create table pmnotrecieve (
+	pmn_id int not null auto_increment primary key,
+	pmn_id_pmsubject int not null,
+	pmn_id_member int not null,
+	pmn_date_stop datetime not null
+)engine=innodb;
 
 set foreign_key_checks =1;
 
 -- contraintes
+alter table tasks add constraint list_tasks foreign key (tas_list) references lists(lis_id);
+alter table produire add constraint treat_task foreign key (pro_auteur) references auteur(aut_id);
 alter table produire add constraint cs1 foreign key (pro_auteur) references auteur(aut_id);
-alter table produire add constraint cs2 foreign key (pro_oeuvre) references oeuvre(oeu_id);
-alter table oeuvre add constraint cs3 foreign key (oeu_support) references support(sup_id);
+alter table produire add constraint cs1 foreign key (pro_auteur) references auteur(aut_id);
+alter table produire add constraint cs1 foreign key (pro_auteur) references auteur(aut_id);
+alter table produire add constraint cs1 foreign key (pro_auteur) references auteur(aut_id);
+alter table produire add constraint cs1 foreign key (pro_auteur) references auteur(aut_id);
+alter table produire add constraint cs1 foreign key (pro_auteur) references auteur(aut_id);
+alter table produire add constraint cs1 foreign key (pro_auteur) references auteur(aut_id);
+alter table produire add constraint cs1 foreign key (pro_auteur) references auteur(aut_id);

@@ -13,10 +13,8 @@
 		- name (varchar)
  		- description (text)
 		- visibility (int)
-		- subjectNumber (FK)
 	• tasks
 		- id (AI)
-		- id_list (FK)
 		- name (varchar)
 		- description (text)
 		- importance (int)
@@ -25,23 +23,18 @@
 		- status (int)
 	• forums
 		- id (AI)
-		- Name (varchar)
+		- name (varchar)
 		- description (text)
 		- date (date)
 		- status (int)
 	• subjects
 		- id (AI)
-		- id_forum (FK)
 		- name (varchar) 
 		- pinned (int)
 		- status (int)
 		- date (date)
-		- task (FK or NULL)
-		- forum (FK)
 	• messages
 		- Id (AI)
-		- id_sender (FK)
-		- id_reciever (FK)
 		- date (date)
 		- content (text)
 		- status (int)
@@ -71,5 +64,13 @@
 	Recieve (ip_reciever, date)
 	- Member 1,n
 	- Private messgage 1,n
+
+	Not recieve (date)
+	- Member 1,n
+	- Private messgage 1,n
+
+	(Blocks
+	- Member 1,n
+	- Member 1,n)
 	</associations>
 </MCD> 
