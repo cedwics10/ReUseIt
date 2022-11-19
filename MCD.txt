@@ -41,6 +41,10 @@
 		- ip (varchar)
 	</entités>
 	<associations>
+	make :
+	- member 1,n
+	- list 1,1 
+
 	references :
 	- tasks 1,1
 	- lists 0,n
