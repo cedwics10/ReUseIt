@@ -17,7 +17,7 @@ create table members (
 	mem_password varchar(100) not null,
 	mem_photo varchar(100) not null,
     mem_arrival_date varchar(100) not null,
-    mem_description varchar(100) not null,
+    mem_description text not null,
     mem_status int not null
 )engine=innodb;
 
@@ -50,7 +50,7 @@ create table forums (
 	for_id int not null auto_increment primary key,
 	for_name varchar(500) not null,
 	for_description text not null,
-	for_date datetime not null,
+	for_date varchar(100) not null,
     for_status int not null
 )engine=innodb;
 
