@@ -16,8 +16,7 @@ include('generators/generator_forum.php');
 // Arrays of example data from messages
 // Arrays of example data from lists
 // Arrays of example data from tasks
-// Arrays of example data from pmsubjects
-// Arrays of example data from pmanswers
+
 // Arrays of example data from pmrecievers
 // Arrays of example data from pmnotrecieve
 // Arrays of example data from blacklist
@@ -29,6 +28,4 @@ include('generators/generator_forum.php');
 // Generate data of tasks
 // Generate data of pmsubjects
 // Generate data of pmanswers
-// Generate data of pmrecievers
-// Generate data of pmnotrecieve
-// Generate data of blacklist
+
