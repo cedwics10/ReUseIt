@@ -73,8 +73,8 @@
 	- Member 1,n
 	- Private messgage 1,n
 
-	(Blocks
+	Blacklists
 	- Member 1,n
-	- Member 1,n)
+	- Member 1,n
 	</associations>
 </MCD> 

@@ -67,5 +67,9 @@
 		- id_pmsubject (FK)
 		- id_member (FK)
 		- date_stop (datetime)
+	• pmnotrecieve
+		- id (AI)
+		- id_member (int)
+		- id_blacklisted (int)	
 	</tables>
 </MLD>

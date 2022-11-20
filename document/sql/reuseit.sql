@@ -121,6 +121,14 @@ create table pmnotrecieve (
 	pmn_date_stop datetime not null
 )engine=innodb;
 
+-- private blacklist table
+drop table if exists blacklist;
+create table blacklist (
+	bla_id int not null auto_increment primary key,
+	bla_id_member int not null,
+	bla_id_blacklisted int not null
+)engine=innodb;
+
 set foreign_key_checks =1;
 
 -- constraints
@@ -144,3 +152,6 @@ alter table pmrecievers add constraint pmr_answer foreign key (pmr_id_answer) re
 
 alter table pmnotrecieve add constraint sub_stop_pmr foreign key (pmn_id_pmsubject) references pmsubjects(pms_id);
 alter table pmnotrecieve add constraint stop_pmr foreign key (pmn_id_member) references members(mem_id);
+
+alter table blacklist add constraint bla_member1 foreign key (bla_id_member) references members(mem_id);
+alter table blacklist add constraint bla_member2 foreign key (bla_id_blacklisted) references members(mem_id);
