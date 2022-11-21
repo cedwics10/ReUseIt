@@ -26,7 +26,7 @@ drop table if exists lists;
 create table lists (
 	lis_id int not null auto_increment primary key,
 	lis_id_member int not null,
-	lis_member int not null,
+	lis_date varchar(100) not null,
 	lis_name varchar(100) not null,
 	lis_description text not null,
 	lis_visbility varchar(100) not null
@@ -40,7 +40,7 @@ create table tasks (
 	tas_name varchar(100) not null,
 	tas_description text not null,
     tas_importance int not null,
-    tas_due_date date not null,
+    tas_due_date varchar(100) not null,
     tas_status int not null
 )engine=innodb;
 
@@ -64,7 +64,7 @@ create table subjects (
 	sub_name varchar(500) not null,
 	sub_pinned int not null,
 	sub_status int not null,
-	sub_date datetime not null
+	sub_date varchar(100) not null
 )engine=innodb;
 
 
@@ -74,7 +74,7 @@ create table messages (
 	mes_id int not null auto_increment primary key,
 	mes_id_member int not null,
 	mes_id_subject int not null,
-	mes_date datetime not null,
+	mes_date varchar(100) not null,
 	mes_content text not null,
     mes_status int not null,
 	mes_ip varchar(500) not null
@@ -98,7 +98,7 @@ create table pmanswers (
 	pma_id_subject int,
 	pma_id_sender int,
 	pma_message text not null,
-	pma_time datetime not null
+	pma_time varchar(100) not null
 )engine=innodb;
 
 -- private messages recievers table
@@ -108,8 +108,8 @@ create table pmrecievers (
 	pmr_id_pmsubject int not null,
 	pmr_id_answer int not null,
 	pmr_id_reciever int not null,
-	pmr_date_recieved datetime,
-	pmr_date_read datetime
+	pmr_date_recieved varchar(100),
+	pmr_date_read varchar(100)
 )engine=innodb;
 
 -- private messages not recieve table
@@ -118,7 +118,7 @@ create table pmnotrecieve (
 	pmn_id int not null auto_increment primary key,
 	pmn_id_pmsubject int not null,
 	pmn_id_member int not null,
-	pmn_date_stop datetime not null
+	pmn_date_stop varchar(100) not null
 )engine=innodb;
 
 -- private blacklist table
