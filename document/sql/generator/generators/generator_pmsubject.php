@@ -28,7 +28,15 @@ while($i < $number_of_pmsubjects)
     $pms_name[] = 'Aide : ' . $titres[0]; # Quote
     $pms_task[] = ($i % 5 == 0) ? 'NULL' : mt_rand(($id_member -1) * 20 + 1, ($id_member-2)*20 + 21);
     $pms_status[] = mt_rand(0,1);
-    $pms_ip[] = strval(mt_rand(0,255)) . '.' . strval(mt_rand(0,255)) . '.' . strval(mt_rand(0,255)) . '.' . strval(mt_rand(0,255));
+    $ip_member = strval(mt_rand(0,255)) . '.' . strval(mt_rand(0,255)) . '.' . strval(mt_rand(0,255)) . '.' . strval(mt_rand(0,255));
+    $pms_ip[] = $ip_member;
+
+    $readers_subject = ($id_member <= 15) ? 
+    range($id_member, $id_member + 5) : range($id_member,20) + range(1,($id_member +5 % 20));
+
+    $data = ['ip' => $ip_member, 
+    'id' => $id_member, 'member_recievers' => $readers_subject];
+    generate_pmanswers($data);
     $i++;
 }
 
@@ -44,4 +52,6 @@ while($i < $number_of_pmsubjects)
 }
 $sql = $sql . ' ' . implode(',' . PHP_EOL , $dataset);
 $pdo->query($sql);
+
+
 ?>

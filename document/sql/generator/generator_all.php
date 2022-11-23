@@ -1,5 +1,5 @@
 <?php
-include('pdo.php');
+include('generators/generator_functions.php');
 
 // Generate members and forums data
 include('generators_basics.php');
@@ -11,5 +11,6 @@ include('generators_tasks.php');
 include('generators_forum_messages.php');
 
 // Generate PM and recievers
+include('generate_func_pm.php');
 include('generators_pm.php');
 ?>
