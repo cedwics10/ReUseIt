@@ -1,6 +1,6 @@
 <?php
 // Arrays of example data from pm
-$number_of_pmsubjects = 400;
+$number_of_pmsubjects = 100;
 
 $titres = [
     'Faire des pâtes', 'Devenir développeur',
@@ -36,7 +36,6 @@ while($i < $number_of_pmsubjects)
 
     $data = ['ip' => $ip_member, 
     'id' => $id_member, 'member_recievers' => $readers_subject];
-    generate_pmanswers($data);
     $i++;
 }
 

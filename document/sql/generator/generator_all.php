@@ -11,6 +11,5 @@ include('generators_tasks.php');
 include('generators_forum_messages.php');
 
 // Generate PM and recievers
-include('generate_func_pm.php');
 include('generators_pm.php');
 ?>
