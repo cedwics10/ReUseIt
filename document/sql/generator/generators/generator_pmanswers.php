@@ -17,7 +17,7 @@ $pma_id_sender = [];
 $pma_message = [];
 $pma_time = [];	
 
-$date_first_answer = [];
+$pma_date_first_answer = [];
 
 $sql = '';
 
@@ -28,7 +28,7 @@ while($i < nb_of_answers)
     shuffle($titres);
 
     $pma_id[] = 'NULL';
-    $current_subject = floor($i / 8) + 1;
+    $current_subject = floor($i / 8);
     $pma_id_subject[] = $current_subject;
     
     $sender_number = mt_rand(1,100);
@@ -36,16 +36,16 @@ while($i < nb_of_answers)
     
     $pma_message[] = $titres[array_rand($titres)];
     
-
     if($i % 8 == 0)
-        $date_first_answer[] = mktime(0,0,0,mt_rand(1,12), mt_rand(0,31), mt_rand(2020,2022));
-    $pma_time[] = $date_first_answer[$current_subject - 1] + 60  * ($i % 8);	
+        $pma_date_first_answer[] = mktime(0,0,0,mt_rand(1,12), mt_rand(0,31), mt_rand(2020,2022));
+    $pma_time[] = $pma_date_first_answer[$current_subject] + 60  * ($i % 8);	
     $i++;
 }
 
 $sql = 'INSERT INTO pmanswers VALUES ';
-$i = 0;
 $dataset = [];
+
+$i = 0;
 while($i < nb_of_answers)
 {
     $dataset[] = "({$pma_id[$i]}, {$pma_id_subject[$i]}, {$pma_id_sender[$i]},{$pdo->quote($pma_message[$i])}, {$pma_time[$i]})" . PHP_EOL;
@@ -53,4 +53,6 @@ while($i < nb_of_answers)
 }
 $sql = $sql . ' ' . implode(',' . PHP_EOL , $dataset);
 print(nl2br($sql));
+
+$ams_answers = array_chunk($pma_id_sender, 8);
 ?>
