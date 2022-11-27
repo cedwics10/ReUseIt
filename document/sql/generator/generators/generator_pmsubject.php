@@ -1,6 +1,8 @@
 <?php
 // Arrays of example data from pm
-$number_of_pmsubjects = 100;
+const nb_answer_per_subjet = 8;
+const nb_of_subjects = 100;
+const nb_of_messages =  nb_of_subjects * nb_answer_per_subjet;
 
 $titres = [
     'Faire des pâtes', 'Devenir développeur',
@@ -17,40 +19,40 @@ $pms_task = [];
 $pms_status = [];
 $pms_ip = [];
 
-$i = 0;
-while($i < $number_of_pmsubjects)
+$data_subject = [];
+
+$subj = 1;
+while($subj <= nb_of_subjects)
 {
     shuffle($titres);
 
     $pms_id[] = 'NULL';
     $id_member = mt_rand(1,20);
     $pms_id_author[] = $id_member;
-    $pms_name[] = 'Aide : ' . $titres[0]; # Quote
-    $pms_task[] = ($i % 5 == 0) ? 'NULL' : mt_rand(($id_member -1) * 20 + 1, ($id_member-2)*20 + 21);
+    
+    shuffle($titres);
+    $pms_name[] = 'Aide : ' . $titres[0];
+    
+    $pms_task[] = ($subj % 5 == 0) ? 'NULL' : mt_rand(($id_member -1) * 20 + 1, ($id_member-2)*20 + 21);
+    
     $pms_status[] = mt_rand(0,1);
+    
     $ip_member = strval(mt_rand(0,255)) . '.' . strval(mt_rand(0,255)) . '.' . strval(mt_rand(0,255)) . '.' . strval(mt_rand(0,255));
     $pms_ip[] = $ip_member;
-
-    $readers_subject = ($id_member <= 15) ? 
-    range($id_member, $id_member + 5) : range($id_member,20) + range(1,($id_member +5 % 20));
-
-    $data = ['ip' => $ip_member, 
-    'id' => $id_member, 'member_recievers' => $readers_subject];
-    $i++;
+    
+    $subj++;
 }
 
 $sql = 'INSERT INTO pmsubjects VALUES ';
-$i = 0;
+$subj = 0;
 $dataset = [];
-while($i < $number_of_pmsubjects)
+while($subj < nb_of_subjects)
 {
-    $dataset[] = "({$pms_id[$i]}, {$pms_id_author[$i]},
-    ". ($pdo->quote($pms_name[$i])) .",{$pms_task[$i]},
-    {$pms_status[$i]}, '{$pms_ip[$i]}')";
-    $i++;
+    $dataset[] = "({$pms_id[$subj]}, {$pms_id_author[$subj]},
+    ". ($pdo->quote($pms_name[$subj])) .",{$pms_task[$subj]},
+    {$pms_status[$subj]}, '{$pms_ip[$subj]}')";
+    $subj++;
 }
 $sql = $sql . ' ' . implode(',' . PHP_EOL , $dataset);
 $pdo->query($sql);
-
-
 ?>

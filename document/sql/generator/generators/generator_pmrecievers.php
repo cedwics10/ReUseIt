@@ -7,7 +7,7 @@ $pmr_id_reciever = [];
 $pmr_date_recieved = [];
 $pmr_date_read = [];
 
-for($answer_no = 0; $answer_no < nb_of_answers;$answer_no++)
+for($answer_no = 0; $answer_no < nb_of_message;$answer_no++)
 {
     $number_subject = floor($answer_no / 8);
     foreach($member_lists_subjects[$number_subject] as $id_reciever)

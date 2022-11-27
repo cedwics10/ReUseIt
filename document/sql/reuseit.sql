@@ -95,10 +95,11 @@ create table pmsubjects (
 drop table if exists pmanswers;
 create table pmanswers (
 	pma_id int not null auto_increment primary key,
-	pma_id_subject int,
-	pma_id_sender int,
+	pma_id_subject int not null,
+	pma_id_sender int not null,
 	pma_message text not null,
-	pma_time varchar(100) not null
+	pma_time varchar(100) not null,
+	pma_ip varchar(100) not null
 )engine=innodb;
 
 -- private messages recievers table
