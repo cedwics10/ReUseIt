@@ -6,9 +6,6 @@ $pdo->exec($sql);
 // Generate data of members
 include('generators/generator_member.php');
 
-// Generate data of blacklist
-include('generators/generator_blacklist.php');
-
 // Generate data of forum
 include('generators/generator_forum.php');
 

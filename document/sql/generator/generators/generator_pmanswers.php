@@ -49,4 +49,5 @@ while($mess_no < nb_of_messages) {
 
 $sql = $sql . ' ' . implode(',' . PHP_EOL, $dataset);
 $pdo->query($sql);
+$subjet_viewers = array_chunk($pma_id_sender, 8);
 ?>

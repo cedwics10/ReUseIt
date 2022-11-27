@@ -36,7 +36,7 @@ while ($i < $tasks_number) {
 }
 
 
-// Generate data of members
+// Upload data 
 $sql_tasks = 'INSERT INTO tasks (tas_id,tas_id_list,tas_name,tas_description,tas_importance,tas_due_date,tas_status) VALUES ';
 
 $data_tasks = [];
