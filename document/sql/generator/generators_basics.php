@@ -2,6 +2,7 @@
 $sql = file_get_contents('../reuseit.sql');
 $pdo->exec($sql);
 
+
 // Generate data of members
 include('generators/generator_member.php');
 

@@ -10,6 +10,6 @@ include('generators_tasks.php');
 // Generate topics and messages data
 include('generators_forum_messages.php');
 
-// Generate PM and recievers
+// Generate PM and recieversg 
 include('generators_pm.php');
 ?>
