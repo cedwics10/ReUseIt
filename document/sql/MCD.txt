@@ -30,7 +30,7 @@
 	• subjects
 		- id (AI)
 		- name (varchar) 
-		- pinned (int)
+		- pinned (bool)
 		- status (int)
 		- date (date)
 	• messages
@@ -51,7 +51,7 @@
 
 	treat : 
 	- tasks 0,1
-	- subjects 0,1
+	- subjects 0,n
 
 	List :
 	- forum 1,n
