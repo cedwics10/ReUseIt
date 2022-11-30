@@ -1,0 +1,8 @@
+.toast-notification {
+    z-index: 1;
+}
+
+.toast-body {
+    opacity: 1;
+    background-color: white;
+}

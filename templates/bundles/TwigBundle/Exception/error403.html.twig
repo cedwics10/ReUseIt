@@ -1,0 +1,13 @@
+{% extends 'layouts/full-width.html.twig' %}
+
+{% block title %}{% trans %}Access forbidden{% endtrans %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans %}Access forbidden{% endtrans %}</h1>
+
+    <div class="mt-3">
+        <p>
+            {% trans %}You do not have the necessary permissions to access this page{% endtrans %} {% trans %}You can{% endtrans %} <a href="{{ path('forum.index') }}">{% trans %}return to the homepage{% endtrans %}</a>.
+        </p>
+    </div>
+{% endblock %}

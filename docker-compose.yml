@@ -1,0 +1,57 @@
+version: '3.6'
+
+services:
+  caddy:
+    image: caddy:2
+    container_name: ${PROJECT_NAME}_caddy
+    depends_on:
+      - php
+    environment:
+      SERVER_NAME: ${SERVER_NAME:-symforum.localhost, caddy:80}
+    ports:
+      # HTTP
+      - target: 80
+        published: 80
+        protocol: tcp
+      # HTTPS
+      - target: 443
+        published: 443
+        protocol: tcp
+      # HTTP/3
+      - target: 443
+        published: 443
+        protocol: udp
+    working_dir: /var/www/html
+    volumes:
+      - ./public:/var/www/html/public:ro
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+  php:
+    build: docker/php
+    container_name: ${PROJECT_NAME}_php
+    user: "1000:1000"
+    env_file:
+      - .env
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html:rw,cached
+      - ./docker/php/symfony.dev.ini:/etc/php8/conf.d/symfony.ini
+
+  database:
+    image: mysql:8
+    container_name: ${PROJECT_NAME}_database
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: main
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - database_data:/var/lib/mysql
+
+volumes:
+  caddy_data:
+  caddy_config:
+  database_data:

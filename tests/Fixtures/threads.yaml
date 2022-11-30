@@ -1,0 +1,10 @@
+include:
+    - forums.yaml
+
+App\Entity\Thread:
+    thread1:
+        title: Thread title
+        slug: first-thread
+        lock: false
+        pin: false
+        forum: '@forum1'

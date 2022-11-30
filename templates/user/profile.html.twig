@@ -1,0 +1,70 @@
+{% extends 'layouts/full-width.html.twig' %}
+
+{% block title %}{{ app.user == user ? 'My profile'|trans : 'Profile of %user%'|trans({'%user%': user}) }}{% endblock %}
+
+{% set role = user_profile_role(user) %}
+
+{% block content %}
+    {% do append_breadcrumb('Members'|trans, path('page.members')) %}
+    {% do append_breadcrumb(user.pseudo) %}
+
+    {{ include('partials/_breadcrumb.html.twig') }}
+
+    <div class="row">
+        <div class="col col-lg-12 col-md-12 col-sm-12">
+            <h3>
+                <span>{{ user }}</span>
+                {% if is_granted('ROLE_MODERATOR') %}
+                    <a class="btn btn-warning btn-sm" href="{{ path('admin.user.details', {'slug': user.slug}) }}" title="{% trans %}Admin{% endtrans %}">
+                        <i class="fas fa-user"></i> {% trans %}Admin{% endtrans %}
+                    </a>
+                {% endif %}
+            </h3>
+            <p>
+                {% if role %}
+                    <strong class="text-danger">{{ role }}</strong><br>
+                {% endif %}
+
+                {% trans %}Registration date{% endtrans %} : {{ user.createdAt|format_datetime('medium', 'none') }}
+                {% if user.lastActivityAt %}
+                    <br>{% trans %}Last activity{% endtrans %} : {{ user.lastActivityAt|format_datetime }}
+                {% endif %}
+                <br> {% trans %}Total messages{% endtrans %} : {{ user.messages|length }}
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col col-lg-6 col-md-6 col-sm-6">
+            <h4>{% trans %}Latest threads created{% endtrans %}</h4>
+            {% if lastThreads|length > 0 %}
+                <ul>
+                    {% for thread in lastThreads %}
+                        <li>
+                            <a href="{{ path('thread.show', {'slug': thread.slug}) }}">{{ thread.title|u.truncate(50, '...', false) }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <a href="{{ path('user.threads', {'slug': user.slug}) }}">{{ app.user == user ? 'See my threads'|trans : 'See all the threads created by %user%'|trans({'%user%': user}) }}</a>
+            {% else %}
+                {% trans %}This user has not yet created a thread{% endtrans %}
+            {% endif %}
+        </div>
+
+        <div class="col col-lg-6 col-md-6 col-sm-6">
+            <h4>{% trans %}Last participations{% endtrans %}</h4>
+            {% if lastMessages|length > 0 %}
+                <ul>
+                    {% for message in lastMessages %}
+                        <li>
+                            <a href="{{ path('message.show', {'uuid': message.uuidBase32}) }}">{{ message.content|striptags|u.truncate(50, '...', false) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                <a href="{{ path('user.messages', {'slug': user.slug}) }}">{{ app.user == user ? 'See my participations'|trans : 'See all the participations of %user%'|trans({'%user%': user}) }}</a>
+            {% else %}
+                {% trans %}This user has not yet posted a message{% endtrans %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
