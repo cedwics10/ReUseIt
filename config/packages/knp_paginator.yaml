@@ -1,3 +1,0 @@
-knp_paginator:
-    template:
-        pagination: 'partials/_pagination.html.twig'
