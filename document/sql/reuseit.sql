@@ -1,5 +1,5 @@
 --
--- base de données: 'reuseit'
+-- database : 'reuseit'
 --
 drop database if exists reuseit;
 create database if not exists reuseit default character set utf8 collate utf8_general_ci;
